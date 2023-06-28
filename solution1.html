@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header,
+    .title,
+    .footer,
+    .box,
+    .item,
+    .top_box,
+    .side_box,
+    .mid_box,
+    .top_item,
+    .side_item,
+    .mid_item,
+    .clear_title,
+    .clear_btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header {
+      width: 600px;
+      height: 100px;
+    }
+
+    .header>button {
+      background-color: white;
+      width: 50px;
+      height: 50px;
+
+      font-size: 25px;
+      border-radius: 100%;
+      border: 1px solid orange;
+    }
+
+    .header>button:active,
+    .footer>button:active {
+      background-color: antiquewhite;
+    }
+
+    .title {
+      width: 400px;
+      height: 50px;
+
+      margin: 0px 70px 0px 50px;
+      font-size: 25px;
+    }
+
+    .box {
+      width: 600px;
+      height: 600px;
+    }
+
+    .item {
+      flex-wrap: wrap;
+
+      width: 585px;
+      height: 540px;
+    }
+
+    .top_box {
+      flex-wrap: wrap;
+
+      width: 585px;
+      height: 90px;
+    }
+
+    .side_box {
+      flex-wrap: wrap;
+
+      width: 135px;
+      height: 450px;
+    }
+
+    .mid_box {
+      flex-wrap: wrap;
+
+      width: 450px;
+      height: 450px;
+    }
+
+    .top_item,
+    .side_item,
+    .mid_item {
+      width: 45px;
+      height: 45px;
+    }
+
+    .mid_item {
+      width: 45px;
+      height: 45px;
+
+      border: 1px solid black;
+      box-sizing: border-box;
+
+      font-size: 30px;
+      user-select: none;
+    }
+
+    .footer {
+      width: 600px;
+      height: 150px;
+    }
+
+    .footer>button {
+      width: 100px;
+      height: 100px;
+
+      margin: 20px;
+      border-radius: 100%;
+      font-size: 60px;
+      border: 2px solid orange;
+    }
+
+    .green {
+      background-color: green;
+    }
+
+    .black {
+      background-color: black;
+    }
+
+    .clear {
+      width: 400px;
+      height: 200px;
+      background-color: white;
+      position: absolute;
+
+      border-radius: 30px;
+      border: 1px solid gray;
+    }
+
+    .clear_title,
+    .clear_btn {
+      width: 398px;
+      height: 99px;
+    }
+
+    .clear_title {
+      font-size: 70px;
+
+      background-color: rgb(13, 93, 133);
+      color: white;
+      border-radius: 30px 30px 0px 0px;
+    }
+
+    .clear_btn {
+      border-radius: 0px 0px 30px 30px;
+    }
+
+    .clear_btn>button {
+      width: 150px;
+      height: 70px;
+
+      font-size: 20px;
+      border-radius: 80px;
+      margin: 10px;
+    }
+
+    .clear_btn>button:active {
+      background-color: rgba(255, 255, 255, 0.857);
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <button type="button">⇦</button>
+    <div class="title">토끼</div>
+  </div>
+  <div class="box">
+    <div class="item">
+      <div class="top_box"></div>
+      <div class="side_box"></div>
+      <div class="mid_box"></div>
+    </div>
+  </div>
+  <div class="footer">
+    <button type="button" class="btn">✖︎</button>
+    <button type="button" class="btn">❓</button>
+    <button type="button" class="btn green">✔️</button>
+  </div>
+  <div class="clear hidden">
+    <div class="clear_title">CLEAR</div>
+    <div class="clear_btn">
+      <button type="button">다시하기</button>
+      <button type="button">✓</button>
+    </div>
+  </div>
+
+  <script>
+    const topBox = document.querySelector('.top_box');
+    const sideBox = document.querySelector('.side_box');
+    const midBox = document.querySelector('.mid_box');
+
+    const topnum = [
+      0, 0, 0, 0, 0, 7, 0, 4, 4, 0, 7, 0, 0,
+      0, 0, 0, 4, 6, 2, 10, 1, 1, 10, 2, 6, 4
+    ];
+
+    const sidenum = [
+      0, 2, 2, 0, 2, 2, 0, 2, 2, 0, 2, 2, 0, 0, 8,
+      0, 0, 10, 0, 0, 10, 2, 4, 2, 0, 4, 4, 0, 0, 8
+    ];
+
+    function creatBox() {
+      for (let i = 0; i < topnum.length; i++) {
+        const div = document.createElement('div');
+        div.classList.add('top_item');
+        div.textContent = topnum[i] === 0 ? '' : topnum[i];
+
+        topBox.appendChild(div);
+      }
+
+      for (let i = 0; i < sidenum.length; i++) {
+        const div = document.createElement('div');
+        div.classList.add('side_item');
+        div.textContent = sidenum[i] === 0 ? '' : sidenum[i];
+
+        sideBox.appendChild(div);
+      }
+    }
+
+    creatBox()
+
+    const datas = [
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    ];
+
+    function creatItem() {
+      midBox.textContent = '';
+
+      for (let i = 0; i < datas.length; i++) {
+        for (let j = 0; j < datas[i].length; j++) {
+          const div = document.createElement('div');
+          div.classList.add('mid_item');
+          div.dataset.no = `${i * 10 + j}`;
+          if (datas[i][j] === 1) {
+            div.classList.add('black')
+          }
+
+          midBox.appendChild(div);
+        }
+      }
+    }
+
+    creatItem();
+
+    const check = [
+      [0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
+      [0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
+      [0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
+      [0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
+      [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 0, 1, 1, 1, 1, 0, 1, 1],
+      [1, 1, 1, 1, 0, 0, 1, 1, 1, 1],
+      [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+    ];
+
+    const footer = document.querySelector('.footer');
+    const btn = document.querySelectorAll('.btn');
+
+    footer.addEventListener('click', ({ target }) => {
+      if (!target.classList.contains('btn')) {
+        return;
+      }
+
+      for (let i = 0; i < btn.length; i++) {
+        btn[i].classList.remove('green');
+      }
+
+      target.classList.add('green');
+    })
+
+    let clicked = false;
+
+    midBox.addEventListener('mousedown', () => {
+      clicked = true;
+      if (!clicked) {
+        return;
+      }
+      draw();
+    });
+
+    midBox.addEventListener('mouseup', () => {
+      clicked = false;
+    });
+
+    midBox.addEventListener('mouseleave', () => {
+      clicked = false;
+    });
+
+    midBox.addEventListener('mouseover', function (event) {
+      if (!clicked) {
+        return;
+      }
+      draw();
+    })
+
+    function dataSetting(target) {
+      const no = Number(target.dataset.no);
+
+      const ii = Math.trunc(no / 10);
+      const jj = no % 10;
+
+      if (target.classList.contains('black')) {
+        datas[ii][jj] = 1;
+      } else if (target.textContent === 'X') {
+        datas[ii][jj] = 0;
+      } else {
+        datas[ii][jj] = 0;
+      }
+    }
+
+    function comparison(target) {
+      for (let i = 0; i < btn.length; i++) {
+        if (btn[i].classList.contains('green')) {
+          if (target.classList.contains('black')) {
+            target.classList.remove('black');
+          } else if (target.textContent === 'X' || target.textContent === '?') {
+            target.textContent = '';
+          } else {
+            if (btn[i].textContent === '✔️') {
+              target.classList.add('black');
+            } else if (btn[i].textContent === '✖︎') {
+              target.textContent = 'X'
+            } else if (btn[i].textContent === '❓') {
+              target.textContent = '?'
+            }
+          }
+        }
+      }
+    }
+
+    const clear = document.querySelector('.clear');
+
+    function draw() {
+      let target = event.target;
+
+      if (!target.classList.contains('mid_item')) {
+        return;
+      }
+
+      if (!clear.classList.contains('hidden')) {
+        return;
+      }
+
+      comparison(target);
+      dataSetting(target);
+
+      for (let i = 0; i < datas.length; i++) {
+        for (let j = 0; j < datas[i].length; j++) {
+          if (datas[i][j] !== check[i][j]) {
+            return;
+          }
+        }
+      }
+
+      clear.classList.remove('hidden');
+    }
+
+    clear.addEventListener('click', ({ target }) => {
+      if (target.textContent !== '다시하기' && target.textContent !== '✓') {
+        return;
+      }
+
+      if (target.textContent === '다시하기') {
+        for (let i = 0; i < datas.length; i++) {
+          for (let j = 0; j < datas[i].length; j++) {
+            datas[i][j] = 0;
+          }
+        }
+
+        creatItem();
+        clear.classList.add('hidden');
+      }
+      
+      if (target.textContent === '✓') {
+        console.log('ch');
+      }
+    })
+  </script>
+</body>
+
+</html>
